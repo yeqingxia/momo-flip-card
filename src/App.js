@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import shuffle from './utilities/shuffle';
 import Card from "./components/Card";
+import Header from './components/Header';
+
 
 function App() {
   const [cards, setCards] = useState(shuffle)
@@ -68,6 +70,7 @@ function App() {
 
   return (
     <>
+      <Header wins={wins} handleNewGame={handleNewGame} />
       <div className='grid'>
         {cards.map((card) => {
           return <Card
