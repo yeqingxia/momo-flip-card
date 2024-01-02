@@ -3,8 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 import shuffle from './utilities/shuffle';
 import Card from "./components/Card";
+import JSConfetti from 'js-confetti'
 import Header from './components/Header';
 
+const jsConfetti = new JSConfetti()
 
 function App() {
   const [cards, setCards] = useState(shuffle)
@@ -27,6 +29,7 @@ function App() {
   }
 
   const handleNewGame = () => {
+    jsConfetti.addConfetti({ emojis: ['💩'], })
     handleTurn()
     setCards(shuffle)
   }
@@ -44,6 +47,8 @@ function App() {
             }
           })
         })
+        jsConfetti.clearCanvas()
+        jsConfetti.addConfetti({ emojis: ['🍖'], })
         handleTurn();
       } else {
         setDisabled(true)
@@ -61,6 +66,8 @@ function App() {
   useEffect(() => {
     const checkWin = cards.filter((card) => !card.matched)
     if (cards.length && checkWin.length < 1) {
+      jsConfetti.clearCanvas()
+      jsConfetti.addConfetti()
       setWins(wins + 1)
       handleTurn()
       setCards(shuffle)
@@ -71,6 +78,7 @@ function App() {
   return (
     <>
       <Header wins={wins} handleNewGame={handleNewGame} />
+
       <div className='grid'>
         {cards.map((card) => {
           return <Card
