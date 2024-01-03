@@ -35,6 +35,10 @@ function App() {
   }
 
   useEffect(() => {
+    jsConfetti.addConfetti({ emojis: ['🐶'], })
+  }, [])
+
+  useEffect(() => {
     let pickTimer
     if (pickOne && pickTwo) {
       if (pickOne.image === pickTwo.image) {
